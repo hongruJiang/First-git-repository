@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>百度地图离线API V2.0</title>
+        <style type="text/css">
+            body, html,#map_demo, #tab, #mapfrm {width: 320px ;height: 568px ;overflow: hidden;margin:0;font-family:"微软雅黑";}
+            #menu{height:568px ;overflow-y:auto}
+            td{font-size:14px}
+            h4{margin:0;}
+            #map_demo1,#map_demo2{height: 50%}
+            </style>
+        <script type="text/javascript" src="baidumapv2/baidumap_offline_v2_load.js"></script>
+        <script type="text/javascript" src="map_demo/jquery.js"></script>
+        <script type="text/javascript" src="map_demo/layer/layer.js"></script>
+        <link rel="stylesheet" type="text/css" href="baidumapv2/css/baidu_map_v2.css"/>
+    </head>
+    <body>
+        <div id="map_demo">2</div>
+    </body>
+    
+    <script type="text/javascript">
+        
+    var call = function()
+    {
+        
+        var callInfo = JSON.stringify(13521282624);
+            tianbai.getCall(callInfo);
+    }
+    var test = function()
+    {
+        
+        var callInfo1 = JSON.stringify(13521282624);
+        tianbai.postCall(callInfo1);
+    }
+<!--    var Callback = function(str)-->
+<!--    {-->
+<!--        alert(str);-->
+<!--    }-->
+<!--    var alerCallback = function()-->
+<!--    {-->
+<!--        alert('13521282624');-->
+<!--            }-->
+    // 百度地图API功能
+        var map = new BMap.Map("map_demo");
+        var point = new BMap.Point(116.418261, 39.921984);
+        map.centerAndZoom(point, 8);
+        map.enableScrollWheelZoom();//启用滚轮放大缩小
+        var sContent =
+    "<h4>于堡磊</h4>" +
+    "<p>技术部 <img  onclick='call()' style='float: right;' src='map_demo/电话.png' width=20 height='20' > </p>"  +
+    "<p>测试四组 <img onclick='test()' style='float: right;' src='map_demo/消息.png' width=20 height='20' > </p>" +
+    "</div>";
+    var point2 = new BMap.Point(117.418261, 39.951984);
+    var marker = new BMap.Marker(point2);
+    var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+    map.addOverlay(marker);
+    marker.addEventListener("click", function(){
+                            this.openInfoWindow(infoWindow);
+                            //图片加载完毕重绘infowindow
+                            document.getElementById('imgDemo').onload = function (){
+                            infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+                            }
+                            });
+    </script>
+</html>

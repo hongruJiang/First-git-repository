@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <title>百度地图离线API V2.0  www.xiaoguo123.com</title>
+	<style type="text/css">
+  body, html,#map_demo, #tab, #mapfrm {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+  #menu{height:100%;overflow-y:auto}
+  td{font-size:14px}
+  h4{margin:0;}
+  </style>
+	
+  <link rel="stylesheet" type="text/css" href="../../baidumapv2/css/baidu_map_v2.css"/>
+</head>
+<body>
+<div id="map_demo"></div>
+</body>
+</html>
+<script type="text/javascript">  
+
+//百度地图API配置
+var bdmapcfg = {
+  'home':'../../baidumapv2/', //API主目录
+  'imgext':'.jpg', //瓦片图的后缀 ------ 根据需要修改，一般是 .png .jpg
+  'tiles_dir':''   //瓦片图的目录，为空默认在 baidumap_v2/tiles/ 目录
+};
+
+//百度地图API功能
+	function loadJScript() {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "../../baidumapv2/baidumap_offline_v2_20160921_min.js";
+		document.body.appendChild(script);    
+    //异步加载增加代码
+    window.BMap=window.BMap||{};
+    window.BMap.apiLoad=function(){delete window.BMap.apiLoad;if(typeof init=="function"){init()}}
+	}
+	function init() {
+		var map = new BMap.Map("map_demo");            // 创建Map实例
+		var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+		map.centerAndZoom(point, 6);                 
+		map.enableScrollWheelZoom();                 //启用滚轮放大缩小
+	}  
+	window.onload = loadJScript;  //异步加载地图
+  
+  /*
+  // 百度地图API功能
+	var map = new BMap.Map("map_demo");    // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初始化地图,设置中心点坐标和地图级别
+	//map.addControl(new BMap.MapTypeControl());   //添加地图类型控件 离线只支持电子地图，卫星/三维不支持
+	//map.setCurrentCity("北京");          // 设置地图显示的城市 离线地图不支持！！
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+  map.addControl(new BMap.NavigationControl());   //缩放按钮
+  */
+</script>
